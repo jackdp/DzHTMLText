@@ -26,14 +26,16 @@ package DzHTMLText;
 {$IMAGEBASE $400000}
 {$DEFINE RELEASE}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Digao Dalpiaz - HTML Label Component'}
+{$DESCRIPTION 'Digao - HTML Label Component'}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
-  vcl;
+  vcl,
+  vclimg;
 
 contains
-  DzHTMLText in 'DzHTMLText.pas';
+  DzHTMLText in 'DzHTMLText.pas',
+  DzPngCollection in 'DzPngCollection.pas';
 
 end.
