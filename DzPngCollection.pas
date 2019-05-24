@@ -103,16 +103,16 @@ type
   {$endregion TDzPngCollectionItem}
 
 
-procedure Register;
+//procedure Register;
 
 
 implementation
 
 
-procedure Register;
-begin
-  RegisterComponents('Digao', [TDzPngCollection]);
-end;
+//procedure Register;
+//begin
+//  RegisterComponents('Digao', [TDzPngCollection]);
+//end;
 
 
 {$region ' --------------------- TDzPngCollection ----------------------- '}
@@ -249,7 +249,7 @@ begin
     s := s + Sep + 'Bit depth: ' + IntToStr(pci.PngImage.Header.BitDepth) + ENDL;
     s := s + Sep + 'Compression level: ' + IntToStr(pci.PngImage.CompressionLevel) + ENDL;
     s := s + Sep + 'Compression method: ' + IntToStr(pci.PngImage.Header.CompressionMethod) + ENDL;
-    s := s + Sep + 'Transparent color: ' + ColorToRgbIntStr(pci.PngImage.TransparentColor) + ENDL;
+    //s := s + Sep + 'Transparent color: ' + ColorToRgbIntStr(pci.PngImage.TransparentColor) + ENDL;
     {$ENDIF}
   end;
 
