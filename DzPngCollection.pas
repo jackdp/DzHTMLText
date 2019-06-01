@@ -338,7 +338,7 @@ constructor TDzPngCollectionItem.Create(ACollection: TCollection);
 begin
   inherited Create(ACollection);
   FPngImage := TPngImage.Create;
-  FName := 'Png_' + Index.toString;
+  FName := 'Png_' + IntToStr(Index);
   FTag := 0;
   FEnabled := True;
 end;
