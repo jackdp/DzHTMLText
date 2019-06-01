@@ -26,8 +26,8 @@ package DzHTMLText2;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Digao - HTML Label Component'}
-{$LIBSUFFIX '_XE7'}
+{$DESCRIPTION '<description>'}
+{$LIBSUFFIX '<libsuffix>'}
 {$IMPLICITBUILD ON}
 
 requires

@@ -27,7 +27,7 @@ package DzHTMLText2;
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'Digao - HTML Label Component'}
-{$LIBSUFFIX '_XE7'}
+{$LIBSUFFIX '_Seattle'}
 {$IMPLICITBUILD ON}
 
 requires

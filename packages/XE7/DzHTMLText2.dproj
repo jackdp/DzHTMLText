@@ -1,10 +1,10 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{89ADE098-B52E-4880-BEF4-1219416D7E7F}</ProjectGuid>
+        <ProjectGuid>{199E348E-078D-4D8B-A002-07A68694EDD0}</ProjectGuid>
         <MainSource>DzHTMLText2.dpk</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Package</AppType>
         <FrameworkType>VCL</FrameworkType>
         <ProjectVersion>16.1</ProjectVersion>
@@ -33,41 +33,55 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <GenDll>true</GenDll>
-        <DCC_S>false</DCC_S>
         <DCC_Description>Digao - HTML Label Component</DCC_Description>
-        <GenPackage>true</GenPackage>
-        <DCC_K>false</DCC_K>
-        <SanitizedProjectName>DzHTMLText2</SanitizedProjectName>
-        <DCC_ImageBase>00400000</DCC_ImageBase>
-        <DCC_N>false</DCC_N>
+        <DllSuffix>_XE7</DllSuffix>
+        <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_K>false</DCC_K>
+        <GenPackage>true</GenPackage>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
         <DCC_E>false</DCC_E>
+        <SanitizedProjectName>DzHTMLText2</SanitizedProjectName>
+        <GenDll>true</GenDll>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+        <DCC_N>false</DCC_N>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>rtl;vclimg;vcl;$(DCC_UsePackage)</DCC_UsePackage>
-        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_UsePackage>rtl;vclimg;vcl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <DCC_DebugInformation>0</DCC_DebugInformation>
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -100,10 +114,33 @@
                 <Source>
                     <Source Name="MainSource">DzHTMLText2.dpk</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JPLibXE7.bpl">JPLib Runtime Package</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JP.TMS.bpl">File E:\Embarcadero\XE7\BPL\Win32\JP.TMS.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JP.Nx6_XE7.bpl">File E:\Embarcadero\XE7\BPL\Win32\JP.Nx6_XE7.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JPPackVCLXE7.bpl">File E:\Embarcadero\XE7\BPL\Win32\JPPackVCLXE7.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JPPackVCL_DesignXE7.bpl">File E:\Embarcadero\XE7\BPL\Win32\JPPackVCL_DesignXE7.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JPPackVCL.bpl">File E:\Embarcadero\XE7\BPL\Win32\JPPackVCL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JP.Nx5.bpl">File E:\Embarcadero\XE7\BPL\Win32\JP.Nx5.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\EsGroupBar.bpl">File E:\Embarcadero\XE7\BPL\Win32\EsGroupBar.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\FreeEsVclComponentsDesign.bpl">File E:\Embarcadero\XE7\BPL\Win32\FreeEsVclComponentsDesign.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclIPIndyImpl210.bpl">File e:\embarcadero\xe7\studio\15.0\bin\dclIPIndyImpl210.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclMetropolisUILiveTile210.bpl">Embarcadero Metropolis UI Live Tile Standard Components</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\IcsVclDXE7Design.bpl">Overbyte ICS VCL Design-Time Package for Delphi XE7</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\IcsFmxDXE7Design.bpl">Overbyte ICS FMX Design-Time Package for Delphi XE7</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\IcsCommonDXE7Design.bpl">Overbyte ICS Common Design-Time Package for Delphi XE7</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Embarcadero\XE7\BPL\Win32\JPPack.bpl">File E:\Embarcadero\XE7\BPL\Win32\JPPack.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Program Files (x86)\FastReports\LibD21\dclfrxtee21.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Program Files (x86)\FastReports\LibD21\dclfrx21.bpl">FastReport 5.0 Components</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Program Files (x86)\FastReports\LibD21\dclfrxDB21.bpl">FastReport 5.0 DB Components</Excluded_Packages>
+                    <Excluded_Packages Name="E:\Program Files (x86)\FastReports\LibD21\dclfrxe21.bpl">FastReport 5.0 Exports</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp210.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
