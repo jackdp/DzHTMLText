@@ -411,7 +411,7 @@ type
   {$endregion TDHTagSupParams}
 
 
-  {$region ' --- TDzHTMLText --- '}
+  {$region ' --- TDzHTMLText2 --- '}
   TDzHTMLText2 = class(TGraphicControl)
   private
     FAbout: String;
@@ -456,6 +456,7 @@ type
     FTagSUPParams: TDHTagSupParams;
 
     FPngCollection: TDzPngCollection;
+    FTagStr: string;
 
     procedure SetText(const Value: String);
     procedure SetAutoHeight(const Value: Boolean);
@@ -490,7 +491,8 @@ type
     procedure SetTagSUPParams(const Value: TDHTagSupParams);
 
     procedure SetPngCollection(const Value: TDzPngCollection);
-    //procedure SetTransparent(const Value: Boolean);
+
+    procedure SetTagStr(const Value: string);    //procedure SetTransparent(const Value: Boolean);
   protected
     procedure Loaded; override;
     procedure Paint; override;
@@ -593,8 +595,9 @@ type
     property TagSUBParams: TDHTagSubParams read FTagSUBParams write SetTagSUBParams;
     property TagSUPParams: TDHTagSupParams read FTagSUPParams write SetTagSUPParams;
     property PngCollection: TDzPngCollection read FPngCollection write SetPngCollection;
+    property TagStr: string read FTagStr write SetTagStr;
   end;
-  {$endregion TDzHTMLText}
+  {$endregion TDzHTMLText2}
 
 
 
@@ -1331,6 +1334,11 @@ procedure TDzHTMLText2.SetTagLIParams(const Value: TDHTagLI1Params);
 begin
   FTagLIParams := Value;
   PropsChanged(Self);
+end;
+
+procedure TDzHTMLText2.SetTagStr(const Value: string);
+begin
+  FTagStr := Value;
 end;
 
 procedure TDzHTMLText2.SetTagSUBParams(const Value: TDHTagSubParams);
