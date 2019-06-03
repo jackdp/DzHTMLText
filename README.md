@@ -7,6 +7,12 @@ Extended version of the [DzHTMLText](https://github.com/digao-dalpiaz/DzHTMLText
 
 ---
 
+Example program compiled with Lazarus
+
+![](doc_images/Example_Tourmaline.png)
+
+---
+
 
 * [New tags](#new-tags)
   * [&lt;HR&gt; - Horizontal line](#hr---horizontal-line)
