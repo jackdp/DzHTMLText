@@ -1,5 +1,5 @@
 
-# TDzHTMLText
+# TDzHTMLText - An advanced HTML label for Delphi and Lazarus
 
 Extended version of the [DzHTMLText](https://github.com/digao-dalpiaz/DzHTMLText) by [Rodrigo Depiné Dalpiaz](https://github.com/digao-dalpiaz)
 
