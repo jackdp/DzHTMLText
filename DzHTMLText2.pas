@@ -107,6 +107,7 @@ const
   TAG_ID_IMG = 14; // Image
   TAG_ID_BBC = 15; // Body background color
   //TAG_ID_SUB = 16; // Subscript
+  TAG_ID_LN = 20; // Line
 
 type
 
@@ -1066,6 +1067,21 @@ begin
           Continue;
         end;
 
+      // ------------ <LN> - Line ----------------
+      if W.TagID = TAG_ID_LN then
+        if W.ExtraColor <> clNone then
+        begin
+          bcv.Pen.Color := W.ExtraColor;
+          bcv.Pen.Style := psSolid;
+          bcv.Pen.Width := 1;
+          R := W.Rect;
+          R.Width := FBitmapWidth;
+          R.Height := 1;
+          bcv.MoveTo(R.Left, R.Top);
+          bcv.LineTo(R.Right, R.Top);
+          Continue;
+        end;
+
       // ------------ <BBC> - Body background color -------------
       if W.TagID = TAG_ID_BBC then
         if W.ExtraColor <> clNone then
@@ -1480,7 +1496,8 @@ type
     ttAlignLeft, ttAlignCenter, ttAlignRight,
     // jp
     ttHorizontalLine, ttHeader1, ttHeader2, ttHeader3, ttLineColor, ttListItem, ttListItem2, ttImage,
-    ttBodyBackgroundColor {<bbc>}, ttSubscript, ttSuperscript
+    ttBodyBackgroundColor {<bbc>}, ttSubscript, ttSuperscript,
+    ttLine
   );
 
   TToken = class
@@ -1974,6 +1991,14 @@ begin
   begin
     AddToken(ttSuperscript, TOff);
     Result := True;
+  end
+  else if (A = 'LN') then
+  begin
+    if Par = '' then Par := 'clBlack';
+    Value := ParamToColor(Par);
+    if Value = clNone then Exit;
+    AddToken(ttLine, TOff, '', Value);
+    Result := True;
   end;
 end;
   {$endregion TBuilder.ProcessTag}
@@ -2238,6 +2263,16 @@ begin
             Ex := C.TextExtent('1');
             Lb.LWords.Add({$IFDEF FPC}Types.{$ENDIF}Rect(X, Y, 0, Y + Ex.Height),
               T.Text, LGroupBound.Count, Align, C.Font, BackColor, LinkOn, LinkID, False, T.Value, TAG_ID_LC);
+            Continue;
+          end;
+
+        // -------------------------- <LN> - line color ---------------------------
+        ttLine:
+          begin
+            //Ex := C.TextExtent('1');
+
+            Lb.LWords.Add({$IFDEF FPC}Types.{$ENDIF}Rect(X, Y, 0, 0),
+              T.Text, LGroupBound.Count, Align, C.Font, BackColor, LinkOn, LinkID, False, T.Value, TAG_ID_LN);
             Continue;
           end;
 
@@ -3091,3 +3126,4 @@ end;
 {$endregion TDHTagSupParams}
 
 end.
+
