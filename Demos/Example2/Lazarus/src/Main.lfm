@@ -1,0 +1,92 @@
+object Form1: TForm1
+  Left = 403
+  Height = 673
+  Top = 250
+  Width = 692
+  Caption = 'Form1'
+  ClientHeight = 673
+  ClientWidth = 692
+  OnCreate = FormCreate
+  LCLVersion = '2.0.3.0'
+  object pnBottom: TPanel
+    Left = 0
+    Height = 27
+    Top = 646
+    Width = 692
+    Align = alBottom
+    ClientHeight = 27
+    ClientWidth = 692
+    Color = 14803425
+    ParentColor = False
+    TabOrder = 0
+    object lblLinkInfo: TLabel
+      Left = 8
+      Height = 14
+      Top = 8
+      Width = 56
+      BorderSpacing.Left = 6
+      Caption = 'lblLinkInfo'
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Layout = tlCenter
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object sbox: TScrollBox
+    Left = 48
+    Height = 184
+    Top = 16
+    Width = 312
+    HorzScrollBar.Page = 75
+    HorzScrollBar.Tracking = True
+    VertScrollBar.Page = 16
+    VertScrollBar.Tracking = True
+    BorderSpacing.Left = 9
+    BorderSpacing.Top = 9
+    ClientHeight = 180
+    ClientWidth = 308
+    TabOrder = 1
+    object htt: TDzHTMLText2
+      Left = 0
+      Height = 16
+      Top = 0
+      Width = 310
+      Align = alTop
+      Color = 14285567
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      ParentColor = False
+      ParentFont = False
+      Text = 'Text'
+      AutoHeight = True
+      StyleLinkHover.Underline = True
+      OnLinkEnter = httLinkEnter
+      OnLinkLeave = httLinkLeave
+      TagH1Params.Font.Height = -24
+      TagH1Params.Font.Name = 'Arial'
+      TagH1Params.Font.Style = [fsBold]
+      TagH1Params.Alignment = taCenter
+      TagH2Params.Font.Height = -20
+      TagH2Params.Font.Name = 'Arial'
+      TagH2Params.Font.Style = [fsBold]
+      TagH3Params.Font.Height = -16
+      TagH3Params.Font.Name = 'Arial'
+      TagH3Params.Font.Style = [fsBold]
+    end
+  end
+  object ActionList1: TActionList
+    Left = 488
+    Top = 208
+    object actEsc: TAction
+      Caption = 'actEsc'
+      OnExecute = actEscExecute
+      ShortCut = 27
+    end
+    object actReopenFile: TAction
+      Caption = 'actReopenFile'
+      OnExecute = actReopenFileExecute
+      ShortCut = 116
+    end
+  end
+end

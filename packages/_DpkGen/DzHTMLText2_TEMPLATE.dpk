@@ -37,6 +37,7 @@ requires
 
 contains
   DzHTMLText2 in '..\..\DzHTMLText2.pas',
+  DzHTMLText2_Helpers in '..\..\DzHTMLText2_Helpers.pas',
   DzPngCollection in '..\..\DzPngCollection.pas',
   DzHTMLText2_Register in '..\..\DzHTMLText2_Register.pas';
 

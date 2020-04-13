@@ -7,17 +7,15 @@ unit DzPngCollection;
   Last mod: 2019.05.22
 }
 
+{$I dz2.inc}
 {$IFDEF FPC}{$mode objfpc}{$H+}{$ENDIF}
 
 interface
 
 uses
-  {$IFDEF FPC}
-  SysUtils, Classes, {Types, UITypes,} Graphics;
-  {$ELSE}
-  //Winapi.Messages, Winapi.Windows,
-  System.SysUtils, System.Classes, System.Types, System.UITypes, Vcl.Graphics, Vcl.Imaging.PngImage;
-  {$ENDIF}
+  SysUtils, Classes, Types, {$IFDEF HAS_SYSTEM_UITYPES}System.UITypes,{$ENDIF} Graphics
+  {$IFDEF DCC}{$IFDEF HAS_UNIT_SCOPE}, Vcl.Imaging.PngImage{$ELSE}, pngimage{$ENDIF}{$ENDIF};
+
 
 
 type

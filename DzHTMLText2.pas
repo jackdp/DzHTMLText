@@ -1,5 +1,6 @@
 ﻿unit DzHTMLText2;
 
+{$I dz2.inc}
 {$IFDEF FPC}{$mode delphi}{$ENDIF}
 
 
@@ -84,20 +85,19 @@ Lazarus support
 ------------------------------------------------------------------------------}
 
 
-
-
-
-
 interface
 
 
 uses
+  Controls, Classes, Messages, Generics.Collections, Graphics, {$IFDEF FPC}LCLType,{$ENDIF}
+  Types,
+  //{$IFDEF FPC}LazarusPackageIntf,{$ENDIF}
+  DzPngCollection,
+  {$IFDEF DCC}{$IFDEF HAS_UNIT_SCOPE}Vcl.Imaging.pngimage,{$ELSE}pngimage,{$ENDIF}{$ENDIF}
+  {$IFDEF DELPHIXE_OR_BELOW}DzHTMLText2_Helpers,{$ENDIF}
+  StrUtils
+  ;
 
-{$IFDEF FPC}
-  Controls, Classes, Messages, Generics.Collections, Graphics, LCLType, Types, LazarusPackageIntf, DzPngCollection;
-{$ELSE}
-  Vcl.Controls, System.Classes, Winapi.Messages, System.Generics.Collections, Vcl.Graphics, System.Types, DzPngCollection, Vcl.Imaging.pngimage;
-{$ENDIF}
 
 const
   TAG_ID_HR = 10; // Horizontal line
@@ -519,7 +519,7 @@ type
     //jp
     procedure SaveToFile(const FileName: string);
     procedure LoadFromFile(const FileName: string);
-    procedure SaveToBitmap(const Bmp: {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap);
+    procedure SaveToBitmap(const Bmp: {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap);
     procedure SaveToBitmapFile(const BmpFile: string);
     function AddPngImage(const Image: TPngImage): integer; // Returns the index of the added image
     function AddPngImageFromFile(const PngFileName: string): integer; // Returns the index of the added image
@@ -545,7 +545,7 @@ type
     property OnDragOver;
     property OnEndDock;
     property OnEndDrag;
-    {$IFDEF DCC}property OnGesture;{$ENDIF}
+    {$IFDEF DELPHI2010_OR_ABOVE}property OnGesture;{$ENDIF}
     {$IFDEF DCC}property OnMouseActivate;{$ENDIF}
     property OnMouseDown;
     property OnMouseEnter;
@@ -607,16 +607,27 @@ type
 implementation
 
 uses
-{$IFDEF FPC}
-  {$IFDEF MSWINDOWS}Windows,{$ENDIF} SysUtils, LCLIntf;
-{$ELSE}
-  System.SysUtils, System.UITypes, Winapi.Windows, Winapi.ShellAPI;
-{$ENDIF}
+  {$IFDEF MSWINDOWS}Windows, {$ENDIF} {$IFDEF DCC}ShellAPI,{$ENDIF}
+  SysUtils
+  {$IFDEF FPC}, LCLIntf{$ENDIF}
+  {$IFDEF DCC}{$IFDEF HAS_SYSTEM_UITYPES}, System.UITypes{$ENDIF}{$ENDIF}
+  ;
+
 
 //procedure Register;
 //begin
 //  RegisterComponents('Digao', [TDzHTMLText2]);
 //end;
+
+function IndexOfAny(const s: string; Chars: array of Char): integer; // 0-based!
+var
+  i, x: integer;
+begin
+  Result := -1;
+  for i := 1 to Length(s) do
+    for x := 0 to High(Chars) do
+      if s[i] = Chars[x] then Exit(i - 1);
+end;
 
 
 {$region ' ---------------------- TDHWord ------------------- '}
@@ -786,7 +797,7 @@ begin
   Invalidate;
 end;
 
-procedure TDzHTMLText2.SaveToBitmap(const Bmp: {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap);
+procedure TDzHTMLText2.SaveToBitmap(const Bmp: {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap);
 begin
   Bmp.SetSize(Canvas.ClipRect.Right, Canvas.ClipRect.Bottom);
   BitBlt(Bmp.Canvas.Handle, 0, 0, Width, Height, Canvas.Handle, 0, 0, SRCCOPY);
@@ -794,9 +805,9 @@ end;
 
 procedure TDzHTMLText2.SaveToBitmapFile(const BmpFile: string);
 var
-  Bmp: {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap;
+  Bmp: {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap;
 begin
-  Bmp := {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap.Create;
+  Bmp := {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap.Create;
   try
     SaveToBitmap(Bmp);
     Bmp.SaveToFile(BmpFile);
@@ -812,7 +823,11 @@ begin
   sl := TStringList.Create;
   try
     sl.Text := FText;
+    {$IFDEF FPC}
+      {$IFDEF HAS_SAVE_WITH_ENCODING}sl.SaveToFile(FileName, TEncoding.UTF8);{$ELSE}sl.SaveToFile(FileName);{$ENDIF}
+    {$ELSE}
     sl.SaveToFile(FileName, TEncoding.UTF8);
+    {$ENDIF}
   finally
     sl.Free;
   end;
@@ -1005,7 +1020,7 @@ end;
 procedure TDzHTMLText2.DoPaint;
 var
   W: TDHWord;
-  B: {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap;
+  B: {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap;
   R: TRect;
   BitmapYPos, BitmapXPos: integer;
   s: string;
@@ -1022,7 +1037,7 @@ var
 begin
 
   //Using internal bitmap as a buffer to reduce flickering
-  B := {$IFDEF DCC}Vcl.{$ENDIF}Graphics.TBitmap.Create;
+  B := {$IFDEF HAS_UNIT_SCOPE}Vcl.{$ENDIF}Graphics.TBitmap.Create;
   try
 
     B.SetSize(FBitmapWidth, Height);
@@ -1776,10 +1791,13 @@ end;
 
 function ParamToColor(A: String): TColor;
 begin
-  if A.StartsWith('#') then if TryHtmlStrToColor(A, Result) then Exit;
-  if (A.StartsWith('rgb', True)) or (Pos(',', A) > 0) or (Pos(' ', A) > 0) then if TryRgbStrToColor(A, Result) then Exit;
+  //if A.StartsWith('#') then if TryHtmlStrToColor(A, Result) then Exit;
+  if AnsiStartsStr('#', A) then if TryHtmlStrToColor(A, Result) then Exit;
+  //if (A.StartsWith('rgb', True)) or (Pos(',', A) > 0) or (Pos(' ', A) > 0) then if TryRgbStrToColor(A, Result) then Exit;
+  if (AnsiStartsText('rgb', A)) or (Pos(',', A) > 0) or (Pos(' ', A) > 0) then if TryRgbStrToColor(A, Result) then Exit;
 
-  if A.StartsWith('$') then Insert('00', A, 2);
+  //if A.StartsWith('$') then Insert('00', A, 2);
+  if AnsiStartsStr('$', A) then Insert('00', A, 2);
   {At HTML, is used Hexadecimal color code with 6 digits, the same used at
   this component. However the Delphi works with 8 digits, but the first two
   digits are always "00"}
@@ -1816,7 +1834,8 @@ begin
   A := Tag;
 
   TOff := False;
-  if A.StartsWith('/') then //closing tag
+  //if A.StartsWith('/') then //closing tag
+  if AnsiStartsStr('/', A) then //closing tag
   begin
       TOff := True;
       Delete(A, 1, 1);
@@ -2050,7 +2069,8 @@ begin
       Jump := 1;
     end else
     begin //all the rest is text
-      I := A.IndexOfAny([' ','<','>','/','\'])+1; //warning: 0-based function!!!
+      //I := A.IndexOfAny([' ','<','>','/','\'])+1; //warning: 0-based function!!!
+      I := IndexOfAny(A, [' ','<','>','/','\'])+1; //warning: 0-based function!!!
       if I=0 then I := Length(A)+1;
 
       Dec(I);

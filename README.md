@@ -1,5 +1,5 @@
-
-# TDzHTMLText - An advanced HTML label for Delphi and Lazarus
+﻿
+# TDzHTMLText2 - An advanced HTML label for Delphi and Lazarus
 
 Extended version of the [DzHTMLText](https://github.com/digao-dalpiaz/DzHTMLText) by [Rodrigo Depiné Dalpiaz](https://github.com/digao-dalpiaz)
 
@@ -9,39 +9,63 @@ Extended version of the [DzHTMLText](https://github.com/digao-dalpiaz/DzHTMLText
 
 Example program compiled with Lazarus
 
-![](doc_images/Example_Tourmaline.png)
+![Example_Tourmaline.png](doc_images/Example_Tourmaline.png)
 
 ---
 
-
-* [New tags](#new-tags)
-  * [&lt;HR&gt; - Horizontal line](#hr---horizontal-line)
-  * [&lt;H1&gt;, &lt;H2&gt;, &lt;H3&gt; - Headers](#h1-h2-h3---headers)
-  * [&lt;LI&gt;, &lt;LI2&gt; - List items (1st and 2nd level)](#li-li2---list-items-1st-and-2nd-level)
-  * [&lt;LC&gt; - Line color](#lc---line-color)
-  * [&lt;BBC&gt; - Body background color](#bbc---body-background-color)
-  * [&lt;SUB&gt; - Subscript](#sub---subscript)
-  * [&lt;SUP&gt; - Superscript](#sup---superscript)
-  * [&lt;IMG&gt; - Images](#img---images)
-* [Additional changes](#additional-changes)
-	* [Lazarus support](#lazarus-support)
-	* [Support for additional colors notations](#support-for-additional-colors-notations)
-	* [HTML Entites](#html-entites)
-  * [ExtraLineSpacing](#extralinespacing)
-  * [ExtraWordSpacing](#extrawordspacing)
-  * [Internal margins](#internal-margins)
-  * [Border](#border)
-  * [Vertical alignment](#vertical-alignment)
-  * [Loading and saving](#loading-and-saving)
-* [TODO](#todo)
+- [TDzHTMLText2 - An advanced HTML label for Delphi and Lazarus](#tdzhtmltext2---an-advanced-html-label-for-delphi-and-lazarus)
+- [Changelog](#changelog)
+- [My modifications](#my-modifications)
+  - [New tags](#new-tags)
+  - [&lt;HR&gt; - Horizontal line](#hr---horizontal-line)
+    - [Example 1](#example-1)
+    - [Example 2](#example-2)
+    - [Example 3](#example-3)
+    - [Example 4](#example-4)
+  - [&lt;H1&gt;, &lt;H2&gt;, &lt;H3&gt; - Headers](#h1-h2-h3---headers)
+    - [Example](#example)
+  - [&lt;LI&gt;, &lt;LI2&gt; - List items (1st and 2nd level)](#li-li2---list-items-1st-and-2nd-level)
+    - [Example](#example-1)
+  - [&lt;LC&gt; - Line color](#lc---line-color)
+    - [Example](#example-2)
+  - [&lt;BBC&gt; - Body background color](#bbc---body-background-color)
+    - [Example](#example-3)
+  - [&lt;SUB&gt; - Subscript](#sub---subscript)
+    - [Example](#example-4)
+  - [&lt;SUP&gt; - Superscript](#sup---superscript)
+    - [Example](#example-5)
+  - [&lt;IMG&gt; - Images](#img---images)
+    - [Example](#example-6)
+  - [&lt;LN&gt; - 1-pixel line](#ln---1-pixel-line)
+    - [Example](#example-7)
+  - [Additional changes](#additional-changes)
+    - [Older Delphi versions support](#older-delphi-versions-support)
+    - [Lazarus support](#lazarus-support)
+    - [Additional colors notations](#support-for-additional-colors-notations)
+    - [HTML Entites](#html-entites)
+      - [Example](#example-8)
+    - [ExtraLineSpacing](#extralinespacing)
+    - [ExtraWordSpacing](#extrawordspacing)
+    - [Internal margins](#internal-margins)
+      - [Example](#example-9)
+    - [Border](#border)
+    - [Vertical alignment](#vertical-alignment)
+    - [Loading and saving](#loading-and-saving)
+  - [TODO](#todo)
 
 ---
 
+# Changelog
 
+* 2020.04.13 - Support for **CodeTyphon** and older Delphi versions: **2009**, **2010**, **XE**, **XE2**, **XE3**.
+* 2019.10.16 - Tag **LN** support - 1-pixel high line drawn in the given color. Eg. red line: `<ln:#FF0000>`
+
+---
 
 # My modifications
 
 ## New tags
+
 * &lt;HR&gt; - Horizontal line
 * &lt;H1&gt; - Header 1
 * &lt;H2&gt; - Header 2
@@ -53,6 +77,7 @@ Example program compiled with Lazarus
 * &lt;SUB&gt; - Subscript
 * &lt;SUP&gt; - Superscript
 * &lt;IMG&gt; - Image
+* &lt;LN&gt; - Horizontal line with 1 pixel width drawn from the current position to the end of line.
 
 ---
 
@@ -62,36 +87,46 @@ Horizontal line drawn in the color selected for the text with the **FC** tag.
 The **HR** tag accepts one optional numeric parameter that specifies the length of the line in pixels. If this parameter is negative, the line will be cut at the end by the given number of pixels.
 
 In the **Object Inspector** (`TagHRParams` property) you can set two additional parameters:
+
 ```delphi
 LineHeight: integer;
 Style: TPenStyle;
 ```
 
-#### Example 1
+### Example 1
+
 The line drawn in the current color from the left to right edge of the component:
+
 ```html
 <HR>
 ```
-![](doc_images/hr_1.png)
 
+![hr_1.png](doc_images/hr_1.png)
 
-#### Example 2
+### Example 2
+
 The line drawn from the position of 70 pixels to the right edge:
+
 ```html
 <T:70><HR>
 ```
-![](doc_images/hr_2.png)
 
+![hr_2.png](doc_images/hr_2.png)
 
-#### Example 3
+### Example 3
+
 The line truncated from the left and the right by 120 pixels:
+
 ```html
 <T:120><HR:-120>
 ```
-![](doc_images/hr_3.png)
 
-#### Example 4
+![hr_3.png](doc_images/hr_3.png)
+
+### Example 4
+
 A red line cut off by 256 pixels on the right:
+
 ```html
 <FC:clRed><HR:-256></FC>
 OR
@@ -99,7 +134,8 @@ OR
 OR
 <FC:rgb(255,0,0)><HR:-256></FC>
 ```
-![](doc_images/hr_4.png)
+
+![hr_4.png](doc_images/hr_4.png)
 
 ---
 
@@ -107,6 +143,7 @@ OR
 
 All header parameters can be set in the **Object Inspector**. Properties: `TagH1Params`, `TagH2Params` and `TagH3Params`.  
 For each header, you can set the following properties:
+
 ```delphi
 Alignment: TAlignment; // center, left or right
 BackgroundColor: TColor;
@@ -114,20 +151,22 @@ Font: TFont;
 Transparent: Boolean; // default True
 ```
 
-#### Example
+### Example
 
 ```html
 <H1>Header 1</H1>
 <H2>Header 2</H2>
 <H3>Header 3</H3>
 ```
-![](doc_images/headers.png)
+
+![headers.png](doc_images/headers.png)
 
 ---
 
 ## &lt;LI&gt;, &lt;LI2&gt; - List items (1st and 2nd level)
 
 List parameters can be set in the **Object Inspector** using properties: `TagLIParams` and `TagLI2Params`. You can set here:
+
 ```delphi
 BulletType: TDHBulletType;
 CustomString: string;
@@ -143,14 +182,15 @@ Bullet types:
 |btCircle|&SmallCircle;|
 |btDash|-|
 |btLongDash|&ndash;|
-|btCustomString| string specified in the<br>`CustomString` field|
+|btCustomString| string specified in the `CustomString` field|
 
 `Margin` - margin from the left edge of the control to the first character of the text.  
 `Spacing` - space (in pixels) from the bullet char to the text.
 
 The **LI** and **LI2** tags accept one parameter - a string used as the list bullet. If specified, the value set in the **Object Inspector** in the `BulletType` property will be ignored.
 
-#### Example
+### Example
+
 ```html
 <li>List item 1
 <li>List item 2
@@ -161,7 +201,8 @@ The **LI** and **LI2** tags accept one parameter - a string used as the list bul
 <li2>Subitem 2
 <li2:*>Subitem 3 (forced bullet "*")
 ```
-![](doc_images/list.png)
+
+![list.png](doc_images/list.png)
 
 ---
 
@@ -169,11 +210,13 @@ The **LI** and **LI2** tags accept one parameter - a string used as the list bul
 
 Background line color drawn from the current position to the end of the current line.
 
-#### Example
+### Example
+
 ```html
-ABCD <LC:##87CEEB> 1234
+ABCD <LC:#87CEEB> 1234
 ```
-![](doc_images/lc_line_color.png)
+
+![lc_line_color.png](doc_images/lc_line_color.png)
 
 ---
 
@@ -182,7 +225,8 @@ ABCD <LC:##87CEEB> 1234
 Body background color drawn from the beginning of the current line to the end of the document.
 You can use several **BBC** tags to draw rectangles in the document.
 
-#### Example
+### Example
+
 ```html
 <bbc:clGray>
 <c><fc:rgb(255,255,255)>Gray background</fc></c>
@@ -196,7 +240,8 @@ You can use several **BBC** tags to draw rectangles in the document.
 <bbc:#4682B4>
 <c><fc:clWhite>SteelBlue</fc></c>
 ```
-![](doc_images/bbc_body_background_color.png)
+
+![bbc_body_background_color.png](doc_images/bbc_body_background_color.png)
 
 ---
 
@@ -204,12 +249,14 @@ You can use several **BBC** tags to draw rectangles in the document.
 
 The text in the the **SUB** tag is displayed in a slightly smaller font and below the normal text. The size and position are calculated automatically, but you can change these automatically calculated values using `TagSUBParams.FontSizeDelta` and `TagSUBParams.PosYDelta`.
 
-#### Example
+### Example
+
 ```html
 <c><fs:11>Tourmaline - general formula</fs>
 <fs:14><fn:Verdana>XY<sub>3</sub>Z<sub>6</sub>[(OH)<sub>4</sub>(BO<sub>3</sub>)<sub>3</sub>(Si<sub>6</sub>O<sub>18</sub>)]</fn></fs></c>
 ```
-![](doc_images/sub_subscript.png)
+
+![sub_subscript.png](doc_images/sub_subscript.png)
 
 ---
 
@@ -217,11 +264,13 @@ The text in the the **SUB** tag is displayed in a slightly smaller font and belo
 
 The text in the the **SUB** tag is displayed in a slightly smaller font and above the normal text. The size and position are calculated automatically, but you can change these automatically calculated values using `TagSUPParams.FontSizeDelta` and `TagSUPParams.PosYDelta`.
 
-#### Example
+### Example
+
 ```html
 <c><fs:16>a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup></fs></c>
 ```
-![](doc_images/sup_superscript.png)
+
+![sup_superscript.png](doc_images/sup_superscript.png)
 
 ---
 
@@ -229,7 +278,8 @@ The text in the the **SUB** tag is displayed in a slightly smaller font and abov
 
 The IMG tag accepts one parameter, which may be the file name or PNG image index from the image collection associated with the component.
 
-#### Example
+### Example
+
 ```html
 <fs:12>
 <bbc:#DB8A8A>
@@ -239,26 +289,55 @@ The IMG tag accepts one parameter, which may be the file name or PNG image index
 </c>
 </fs>
 ```
-![](doc_images/img_image.png)
+
+![img_image.png](doc_images/img_image.png)
 
 If you want to use the PNG collection, drop the **TDzPngCollection** from the **Component Palette** on the form and associate your `DzHTMLText` component with this collection using property `DzHTMLText.PngCollection`. **TDzPngCollection** is a non-visual component which can store any number of PNG images. Unlike **TImageList**, each image can have a different size. Images are stored internally as PNG, not bitmaps, which reduces the size of the DFM file. Of course, assuming that PNG images are compressed.
 
 Add some images to `DzPngCollection` using the `Items` property in the **Object Inspector**. You can also add images at runtime using methods: `AddPngImage`, `AddPngImageFromFile`.
 
 To display image from the collection you can use, eg:
+
 ```html
 <img:0>
 ```
+
 where `0` is the index of the PNG image in the `DzPngCollection` component.
 
+---
 
-<br><br><br>
+## &lt;LN&gt; - 1-pixel line
+
+Horizontal line with 1 pixel width drawn from the current position to the end of line. Accepts one parameter - line color.
+
+### Example
+
+```html
+<bbc:clSilver>
+
+<bbc:#C8E9FD><ln:#8DB6FA>
+<c>Blue line above</c>
+
+<bbc:#EEDBEE><ln:#CA91CA>
+<c>Pink line above</c>
+
+<bbc:#D2E8DA><ln:#7EBE98>
+<c>Green line above</c>
+
+<bbc:clSilver>
+```
+
+![img_image.png](doc_images/ln.png)
 
 ## Additional changes
 
+### Older Delphi versions support
+
+Added support for Delphi 2009 - XE3, so now all Unicode versions of Delphi are supported.
+
 ### Lazarus support
 
-Tested on Lazarus 2.0.3 and FPC 3.3.1, on Windows 10 (32 &amp; 64-bit) and Xubuntu 18.04 (32 &amp; 64-bit).
+Tested on Lazarus 2.0.6 + FPC 3.0.4, Lazarus 2.0.7 + FPC 3.3.1, CodeTyphon 7.00 + FPC 3.1.1
 
 ---
 
@@ -270,7 +349,8 @@ In addition to the original component, which uses the Delphi color names (`clWhi
 * `<fc:#00FF00>`
 * `<bc:#ABC>` - short notation for `#AABBCC`
 
-and RGB colors, eg::
+and RGB colors, eg:
+
 * `<bbc:Rgb(50,100,150)>`
 * `<fc:RGB(255,128,128)>`
 * `<fc:rgb(128 64 32)>` - spaces can also be separators
@@ -325,6 +405,7 @@ I changed the name of the `ReplaceForcedChars` function to `ReplaceHtmlEntities`
 |`&SmallCircle;`|&SmallCircle;|
 
 #### Example
+
 ```html
 <bbc:#555><fc:#DDD>
 <fs:14><fn:Courier New>
@@ -334,7 +415,8 @@ P<sub>o</sub> = &Pi;r&sup2;
 sin&sup2;&alpha; + cos&sup2;&alpha; = 1
 </fn></fs></fc>
 ```
-![](doc_images/html_entities.png)
+
+![html_entities.png](doc_images/html_entities.png)
 
 ---
 
@@ -343,22 +425,26 @@ sin&sup2;&alpha; + cos&sup2;&alpha; = 1
 Additional vertical space between lines in pixels. Property `TDzHTMLText.ExtraLineSpacing`.
 
 Default line spacing:
+
 ```html
 <t:20>ExtraLineSpacing = 0
 <t:20>ExtraLineSpacing = 0
 <t:20>ExtraLineSpacing = 0
 <t:20>ExtraLineSpacing = 0
 ```
-![](doc_images/extra_line_spacing_0.png)
-<br><br>
+
+![extra_line_spacing_0.png](doc_images/extra_line_spacing_0.png)
+
 ExtraLineSpacing = 6:
+
 ```html
 <t:20>ExtraLineSpacing = 6
 <t:20>ExtraLineSpacing = 6
 <t:20>ExtraLineSpacing = 6
 <t:20>ExtraLineSpacing = 6
 ```
-![](doc_images/extra_line_spacing_6.png)
+
+![extra_line_spacing_6.png](doc_images/extra_line_spacing_6.png)
 
 ---
 
@@ -372,9 +458,8 @@ Additional horizontal space between words in pixels. Property `TDzHTMLText.Extra
 <t:20>The default spacing between words
 <t:20>The default spacing between words
 ```
-![](doc_images/extra_word_spacing_0.png)
 
-<br>
+![extra_word_spacing_0.png](doc_images/extra_word_spacing_0.png)
 
 ```html
 <t:20>Extra word spacing = 4
@@ -382,7 +467,8 @@ Additional horizontal space between words in pixels. Property `TDzHTMLText.Extra
 <t:20>Extra word spacing = 4
 <t:20>Extra word spacing = 4
 ```
-![](doc_images/extra_word_spacing_4.png)
+
+![extra_word_spacing_4.png](doc_images/extra_word_spacing_4.png)
 
 ---
 
@@ -399,24 +485,21 @@ Some text
 <t:20>Some text (20)
 ```
 
-<br>
-
 ```delphi
 DzHTMLText.Color := $00A06596;
 DzHTMLText.InternalMargins.Left := 20;
 DzHTMLText.InternalMargins.Right := 20;
 ```
 
-![](doc_images/internal_margin_1.png)
-
-<br>
+![internal_margin_1.png](doc_images/internal_margin_1.png)
 
 ```delphi
 DzHTMLText.Color := $00E6C8DC;
 DzHTMLText.InternalMargins.Left := 20;
 DzHTMLText.InternalMargins.Right := 20;
 ```
-![](doc_images/internal_margin_2.png)
+
+![internal_margin_2.png](doc_images/internal_margin_2.png)
 
 ---
 
@@ -426,7 +509,7 @@ You can set the component's boder using `TDzHTMLText.Border` property.
 
 Warnig! Flickering when border width > 1. Place **DzHTMLText** on **TPanel**/**TForm** with `DoubleBuffered` set to True.
 
-![](doc_images/border.png)
+![border.png](doc_images/border.png)
 
 ---
 
@@ -434,9 +517,9 @@ Warnig! Flickering when border width > 1. Place **DzHTMLText** on **TPanel**/**T
 
 The displayed text can be positioned vertically, but only when the `AutoHeight` is set to False.
 
-![](doc_images/vertical_alignment_top.png)
-![](doc_images/vertical_alignment_center.png)
-![](doc_images/vertical_alignment_bottom.png)
+![vertical_alignment_top.png](doc_images/vertical_alignment_top.png)
+![vertical_alignment_center.png](doc_images/vertical_alignment_center.png)
+![vertical_alignment_bottom.png](doc_images/vertical_alignment_bottom.png)
 
 ---
 
@@ -445,9 +528,6 @@ The displayed text can be positioned vertically, but only when the `AutoHeight` 
 You can save and load text with the `SaveToFile` and `LoadFromFile` methods.
 
 To save the displayed text (which is actually an image) to the bitmap, use `SaveToBitmap` or `SaveToBitmapFile` methods.
-
-
-
 
 ## TODO
 

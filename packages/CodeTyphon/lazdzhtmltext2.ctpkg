@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="LazDzHTMLText2"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value="..\.."/>
+        <OtherUnitFiles Value="..\.."/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="4">
+      <Item1>
+        <Filename Value="..\..\DzHTMLText2.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="DzHTMLText2"/>
+      </Item1>
+      <Item2>
+        <Filename Value="..\..\DzHTMLText2_Register.pas"/>
+        <HasRegisterProc Value="True"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="DzHTMLText2_Register"/>
+      </Item2>
+      <Item3>
+        <Filename Value="..\..\DzPngCollection.pas"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="DzPngCollection"/>
+      </Item3>
+      <Item4>
+        <Filename Value="..\..\dz2.inc"/>
+        <Type Value="Include"/>
+        <FRMtype Value="0"/>
+      </Item4>
+    </Files>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="adLCLbase"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="adFCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
+  </Package>
+</CONFIG>
