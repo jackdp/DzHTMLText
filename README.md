@@ -1,5 +1,5 @@
 ﻿
-# TDzHTMLText2 - An advanced HTML label for Delphi and Lazarus
+# TDzHTMLText2 - An advanced HTML label for Delphi, Lazarus and CodeTyphon
 
 Extended version of the [DzHTMLText](https://github.com/digao-dalpiaz/DzHTMLText) by [Rodrigo Depiné Dalpiaz](https://github.com/digao-dalpiaz)
 
@@ -18,36 +18,22 @@ Example program compiled with Lazarus
 - [My modifications](#my-modifications)
   - [New tags](#new-tags)
   - [&lt;HR&gt; - Horizontal line](#hr---horizontal-line)
-    - [Example 1](#example-1)
-    - [Example 2](#example-2)
-    - [Example 3](#example-3)
-    - [Example 4](#example-4)
   - [&lt;H1&gt;, &lt;H2&gt;, &lt;H3&gt; - Headers](#h1-h2-h3---headers)
-    - [Example](#example)
   - [&lt;LI&gt;, &lt;LI2&gt; - List items (1st and 2nd level)](#li-li2---list-items-1st-and-2nd-level)
-    - [Example](#example-1)
   - [&lt;LC&gt; - Line color](#lc---line-color)
-    - [Example](#example-2)
   - [&lt;BBC&gt; - Body background color](#bbc---body-background-color)
-    - [Example](#example-3)
   - [&lt;SUB&gt; - Subscript](#sub---subscript)
-    - [Example](#example-4)
   - [&lt;SUP&gt; - Superscript](#sup---superscript)
-    - [Example](#example-5)
   - [&lt;IMG&gt; - Images](#img---images)
-    - [Example](#example-6)
   - [&lt;LN&gt; - 1-pixel line](#ln---1-pixel-line)
-    - [Example](#example-7)
   - [Additional changes](#additional-changes)
     - [Older Delphi versions support](#older-delphi-versions-support)
     - [Lazarus support](#lazarus-support)
     - [Additional colors notations](#support-for-additional-colors-notations)
     - [HTML Entites](#html-entites)
-      - [Example](#example-8)
     - [ExtraLineSpacing](#extralinespacing)
     - [ExtraWordSpacing](#extrawordspacing)
     - [Internal margins](#internal-margins)
-      - [Example](#example-9)
     - [Border](#border)
     - [Vertical alignment](#vertical-alignment)
     - [Loading and saving](#loading-and-saving)
@@ -329,15 +315,19 @@ Horizontal line with 1 pixel width drawn from the current position to the end of
 
 ![img_image.png](doc_images/ln.png)
 
+---
+
 ## Additional changes
 
 ### Older Delphi versions support
 
 Added support for Delphi 2009 - XE3, so now all Unicode versions of Delphi are supported.
 
+---
+
 ### Lazarus support
 
-Tested on Lazarus 2.0.6 + FPC 3.0.4, Lazarus 2.0.7 + FPC 3.3.1, CodeTyphon 7.00 + FPC 3.1.1
+Tested on Lazarus 2.0.6 + FPC 3.0.4, Lazarus 2.0.7 + FPC 3.3.1, CodeTyphon 7.00 + FPC 3.3.1
 
 ---
 
